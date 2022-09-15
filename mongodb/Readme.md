@@ -48,7 +48,7 @@ mongosh mongodb://192.168.64.4:32000 -u adminuser -p password
 
 or
 
-mongosh mongodb://adminuser@192.168.64.4:32000
+mongosh mongodb://adminuser:password@192.168.64.4:32000
 
 ※mongosh mongodb://<ip>:<port of nodeport svc>/ships -u adminuser -p password
 ```
@@ -58,7 +58,7 @@ mongosh mongodb://adminuser@192.168.64.4:32000
 k apply -f mongodb-client.yaml
 
 kubectl exec deployment/mongo-client -it -n mongodb -- /bin/bash
-mongo --host mongo-nodeport-svc --port 27017 -u adminuser -p password
+mongosh --host mongo-nodeport-svc --port 27017 -u adminuser -p password
 
 help
 show dbs
@@ -67,6 +67,11 @@ use db1
 show collections
 db.blogs.insert({name: "devopscube" })
 db.blogs.find()
+db.blogs.updateOne({ name: "devops"}, { $set: { name: "devopsaaa" }})
+db.blogs.findOneAndUpdate({name: "devopscube" }, { $set: { name: "devops" }})
+db.blogs.find({name:"devops"})
+db.blogs.deleteOne({name:"devops"})
+db.blogs.drop()
 show logs
 exit
 ```
