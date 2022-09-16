@@ -8,7 +8,7 @@ echo "password" | base64
 ### デプロイ
 ```
 k apply -f pv-volume.yml
-k apply -f posgtres-ns.yml
+k apply -f postgres-ns.yml
 k apply -f postgres-pv-claim.yml
 k apply -f postgres-secrets.yml
 k apply -f postgres-deployment.yml
